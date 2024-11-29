@@ -688,6 +688,4 @@ namespace Core
         }
  
     }
-
-     
 }
