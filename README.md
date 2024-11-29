@@ -16,7 +16,7 @@
 
 - 支持自定义并击映射
 
-- 支持中英文并击录入，不需要使用shift配合，[演示视频](https://www.bilibili.com/video/BV1uT411F7Q2/)
+- 支持中英文并击录入，不需要使用shift配合：[BV1uT411F7Q2](https://www.bilibili.com/video/BV1uT411F7Q2/)
 
 
 - 支持自定义
@@ -31,8 +31,7 @@
 - 速录助手模式，配合第3方输入法实现键盘并击录入
 
 
-- 支持整句输出文字和输出图片 [演示视频](https://www.bilibili.com/video/BV1Ck4y147na/ https://www.bilibili.com/video/BV1gv4y1g7fG/)
-
+- 支持整句输出文字和输出图片： [BV1Ck4y147na](https://www.bilibili.com/video/BV1Ck4y147na/) 、[BV1gv4y1g7fG](https://www.bilibili.com/video/BV1gv4y1g7fG/)
 
 
 
@@ -50,9 +49,9 @@
 
 它的特点： 1、 音码单字无重码 2、超300万大词库，高频词低重码 3、一击字支持3000+ 4、一击高频词6500+ 5、分左右一简，一简字80+ 6、右手单击顶功 7、取码规律强，不用死记硬背
 
-空明码 300速度演示地址：https://www.bilibili.com/video/BV1M3411Y7aB/
+空明码 300速度演示地址：[BV1M3411Y7aB](https://www.bilibili.com/video/BV1M3411Y7aB/)
 
-搜狗双拼 配合 并击助手 300速度录屏：https://www.bilibili.com/video/BV1VB4y1X7mz/
+搜狗双拼 配合 并击助手 300速度录屏：[BV1VB4y1X7mz](https://www.bilibili.com/video/BV1VB4y1X7mz/)
 
 
 
