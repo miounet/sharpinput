@@ -1544,7 +1544,7 @@ namespace Core.Base
                         try
                         {
                             if (InputMode.lbinputc[i] == null) break;
-                            if (string.IsNullOrEmpty(cachearry[i])) break; ;
+                            if (string.IsNullOrEmpty(cachearry[i])) break;
                             string v = GetCutStr(cachearry[i].Split('|')[1]);
 
                             string pos = i == 9 ? "0." : (i + 1).ToString() + ".";
@@ -1586,7 +1586,7 @@ namespace Core.Base
                     if (cachearry == null) return;
                     for (int i = 0; i < cachearry.Length; i++)
                     {
-                        if (string.IsNullOrEmpty(cachearry[i])) break; ;
+                        if (string.IsNullOrEmpty(cachearry[i])) break;
                         string v = GetCutStr(cachearry[i].Split('|')[1]);
                         string pos = i == 9 ? "0." : (i + 1).ToString() + ".";
                         Font tfont = new Font(InputMode.SkinFontName, InputMode.SkinFontSize);

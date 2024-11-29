@@ -1,10 +1,7 @@
 ﻿using Core.Base;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 namespace Core.Comm
@@ -16,15 +13,12 @@ namespace Core.Comm
     {
         private static bool running = true;
         private static Thread updateTh = null;
-        private static Thread updateCloudDictTh = null;
-        private static Thread getMyInfo = null;
+        private static readonly Thread updateCloudDictTh = null;
+        private static readonly Thread getMyInfo = null;
         public static void Start()
         {
             running = true;
 #if !DEBUG
- 
-          
-
             //updateCloudDictTh = new Thread(new ThreadStart(UpdateCloudDict));
             //updateCloudDictTh.IsBackground = true;
             //updateCloudDictTh.Start();
@@ -58,7 +52,6 @@ namespace Core.Comm
                 }
                 catch { }
             }
-
             if (getMyInfo != null)
             {
                 try
@@ -84,13 +77,10 @@ namespace Core.Comm
                         continue;
                     }
                     UpdataSoft();
-
                     UpdataDict();
-
                     Thread.Sleep(1000 * 60 * 60);
                 }
                 catch { }
-                
             }
         }
 
@@ -125,34 +115,29 @@ namespace Core.Comm
                         {
                             updataok = false;
                         }
-
                     }
 
                     if (updataok)
                     {
                         //关闭速录软件，打开升级解压程序
-
-                        System.Diagnostics.Process.Start(System.IO.Path.Combine(InputMode.AppPath, "update.exe"));
-
+                        _ = System.Diagnostics.Process.Start(System.IO.Path.Combine(InputMode.AppPath, "update.exe"));
                         Program.MIme.ExitSelect(null, null);
                     }
                     #endregion
-                    return;
                 }
                 else if (flag)
-                {
-                    MessageBox.Show("没有检测到要更新的程序!");
-                    return;
-                }
+                    _ = MessageBox.Show("没有检测到要更新的程序!");
             }
-            catch (Exception ex) { string ss = ex.ToString(); }
+            catch (Exception ex)
+            {
+                _ = ex.ToString();
+            }
         }
 
         public static void UpdataDict(bool flag = false)
         {
             try
             {
-
                 UpdateEnt data = ApiClient.GetUpdateInfo(Win.WinInput.ApiDictUrl);
                 if (Win.WinInput.DictVersion != data.DictVersion)
                 {
@@ -166,27 +151,25 @@ namespace Core.Comm
                         Win.Login info = new Win.Login(false, Core.Win.WinInput.Input, 0);
                         info.TopMost = true;
                         info.Show();
-                      
+
                         try
                         {
-
                             WebClient client = new WebClient();
                             string filename = System.IO.Path.Combine(InputMode.AppPath, DateTime.Now.Ticks.ToString() + ".zip");
-                       
+
                             client.DownloadFile(du, filename);
                             Thread.Sleep(200);
 
                             if (File.Exists(filename))
                             {
                                 //下载完成解压
-                                updataok = ZipClass.UnZip(filename, System.IO.Path.Combine(InputMode.AppPath, "dict", InputMode.CDPath),"");
+                                updataok = ZipClass.UnZip(filename, System.IO.Path.Combine(InputMode.AppPath, "dict", InputMode.CDPath), "");
                                 Thread.Sleep(200);
                                 File.Delete(filename);//解压完成，删除下载的文件
                                 updataok = true;
                                 info.Close();
 
-                                Program.MIme.InputIni();
-                               
+                                _ = Program.MIme.InputIni();
                             }
                         }
                         catch
@@ -194,22 +177,18 @@ namespace Core.Comm
                             info.Close();
                             updataok = false;
                         }
-                        
                     }
-
-                  
                     #endregion
-                    return;
                 }
                 else if (flag)
-                {
-                    MessageBox.Show("没有检测到要更新的词库!");
-                    return;
-                }
-
+                    _ = MessageBox.Show("没有检测到要更新的词库!");
             }
-            catch (Exception ex) { string ss = ex.ToString(); }
+            catch (Exception ex)
+            {
+                _ = ex.ToString();
+            }
         }
+
         //private static void GetMyInfo()
         //{
         //    while (running)
@@ -222,20 +201,19 @@ namespace Core.Comm
         //                Thread.Sleep(2000);
         //                continue;
         //            }
- 
+
         //            qzxxiEntity.InfoEntity data = ApiClient.GetMyInfo(Win.WinInput.ApiUrl);
         //            if (!string.IsNullOrEmpty(data.InfoStr))
         //            {
         //                Program.InfoFrm.SendMsg(data);
         //            }
-                   
+
         //        }
         //        catch { Thread.Sleep(1000 * 60 * 20); }
 
         //        Thread.Sleep(1000 * 60 * 2);
         //    }
         //}
-
 
         //private static void UpdateCloudDict()
         //{

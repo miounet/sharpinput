@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Core.Comm
 {
@@ -15,17 +14,15 @@ namespace Core.Comm
         /// <summary>
         /// Decrypt key
         /// </summary>
-        const string Decrypt_string = "P@ssW@rdqzsr";
- 
+        private const string Decrypt_string = "P@ssW@rdqzsr";
+
         /// <summary>
         /// 加密
         /// </summary>
         /// <param name="dataValue">被加密源字符串</param>
         /// <returns>加密后字符串</returns>
-        public static String EncryptCommon(String dataValue)
-        {
-            return EncryptCommon(dataValue, Decrypt_string);
-        }
+        public static string EncryptCommon(string dataValue)
+            => EncryptCommon(dataValue, Decrypt_string);
 
         /// <summary>
         /// 加密
@@ -33,10 +30,10 @@ namespace Core.Comm
         /// <param name="keyPwd">密钥</param>
         /// <param name="dataValue">被加密源字符串</param>
         /// <returns>加密后字符串</returns>
-        public static String EncryptCommon(String dataValue, string kEY)
+        public static string EncryptCommon(string dataValue, string kEY)
         {
 
-            String keyPwd = kEY;
+            string keyPwd = kEY;
             try
             {
                 using (DESCryptoServiceProvider desc = new DESCryptoServiceProvider()) //des进行加密
@@ -71,10 +68,8 @@ namespace Core.Comm
         /// </summary>
         /// <param name="dataValue">值</param>
         /// <returns>解密后的结果</returns>
-        public static String DecryptCommon(String dataValue)
-        {
-            return DecryptCommon(dataValue, Decrypt_string);
-        }
+        public static string DecryptCommon(string dataValue)
+            => DecryptCommon(dataValue, Decrypt_string);
 
         /// <summary>
         ///  数据表中数据的解密
@@ -82,7 +77,7 @@ namespace Core.Comm
         /// <param name="dataValue">值</param>
         /// <param name="kEY">key</param>
         /// <returns>解密后的密码</returns>
-        public static String DecryptCommon(String dataValue, string kEY)
+        public static string DecryptCommon(string dataValue, string kEY)
         {
             try
             {
@@ -126,7 +121,6 @@ namespace Core.Comm
             c[1] = (char)rd.Next(97, 122);
             string move = new string(c);
 
-
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] bytValue, bytHash;
             bytValue = System.Text.Encoding.UTF8.GetBytes(move + sDataIn);
@@ -134,11 +128,10 @@ namespace Core.Comm
             md5.Clear();
             StringBuilder sTemp = new StringBuilder();
             for (int i = 0; i < bytHash.Length; i++)
-            {
-                sTemp.Append(bytHash[i].ToString("X").PadLeft(2, '0'));
-            }
+                _ = sTemp.Append(bytHash[i].ToString("X").PadLeft(2, '0'));
             return move + sTemp.ToString();
         }
+
         /// <summary>
         /// 得到md5加密后的字符串
         /// </summary>
@@ -146,8 +139,6 @@ namespace Core.Comm
         /// <returns>加密后的前缀</returns>
         public static string GetMD5(string sDataIn)
         {
-           
-
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] bytValue, bytHash;
             bytValue = System.Text.Encoding.UTF8.GetBytes(sDataIn);
@@ -155,10 +146,8 @@ namespace Core.Comm
             md5.Clear();
             StringBuilder sTemp = new StringBuilder();
             for (int i = 0; i < bytHash.Length; i++)
-            {
-                sTemp.Append(bytHash[i].ToString("X").PadLeft(2, '0'));
-            }
-            return   sTemp.ToString();
+                _ = sTemp.Append(bytHash[i].ToString("X").PadLeft(2, '0'));
+            return sTemp.ToString();
         }
 
         public static string MD5EncryptTo16(string EncryptString)
@@ -168,16 +157,7 @@ namespace Core.Comm
             clearBytes = new MD5CryptoServiceProvider().ComputeHash(clearBytes);
             string ret = clearBytes.Aggregate("", (current, t) => current + t.ToString("x").PadLeft(2, '0'));
             var tt = ret;
-            if (tt == "" || tt.Length < 30)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return tt.Substring(8, 16);
-            }
+            return tt == "" || tt.Length < 30 ? string.Empty : tt.Substring(8, 16);
         }
- 
-
     }
 }

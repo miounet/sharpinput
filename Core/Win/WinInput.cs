@@ -2848,7 +2848,7 @@ namespace Core.Win
             foreach (var dir in fs)
             {
                 MenuItem ttools = new MenuItem();
-                string inputname = dir.Substring(dir.LastIndexOf("\\") + 1); ;
+                string inputname = dir.Substring(dir.LastIndexOf("\\") + 1);
                 if (InputMode.ZFPath == inputname)
                     ttools.Checked = true;
                 ttools.Text = inputname;
@@ -2864,7 +2864,7 @@ namespace Core.Win
             foreach (var dir in dirs)
             {
                 MenuItem ttools = new MenuItem();
-                string inputname= dir.Substring(dir.LastIndexOf("\\") + 1); ;
+                string inputname= dir.Substring(dir.LastIndexOf("\\") + 1);
                 if (InputMode.CDPath == inputname)
                     ttools.Checked = true;
                 ttools.Text = inputname;
@@ -2880,7 +2880,7 @@ namespace Core.Win
             foreach (var dir in fdirs)
             {
                 MenuItem ttools = new MenuItem();
-                string inputname = dir.Substring(dir.LastIndexOf("\\") + 1); ;
+                string inputname = dir.Substring(dir.LastIndexOf("\\") + 1);
                 if (InputMode.PFPath == inputname)
                     ttools.Checked = true;
                 ttools.Text = inputname;

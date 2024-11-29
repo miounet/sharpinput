@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Core.Comm
 {
@@ -12,8 +9,9 @@ namespace Core.Comm
     /// </summary>
     public class RegHelp
     {
-        static List<MapintKey> regsortkeys = null;
-        public static string RegexReplace(string value,string regstr)
+        private static List<MapintKey> regsortkeys = null;
+
+        public static string RegexReplace(string value, string regstr)
         {
             string x = value;
             if (regstr.TrimStart().StartsWith("alphabet:"))
@@ -45,28 +43,23 @@ namespace Core.Comm
                 regstr = regstr.Replace("xlit", "");
                 string[] reglist = new string[0];
                 if (regstr.LastIndexOf('/') > 0)
-                {
                     reglist = regstr.Split('/');
-                }
                 else if (regstr.LastIndexOf(' ') > 0)
-                {
                     reglist = regstr.Split(' ');
-                }
                 else if (regstr.LastIndexOf('=') > 0)
-                {
                     reglist = regstr.Split('=');
-                }
+
                 if (reglist.Length > 2)
                 {
                     string str1 = reglist[1];
                     string str2 = reglist[2];
                     string tx = "";
-                    for(int i = 0; i < x.Length; i++)
+                    for (int i = 0; i < x.Length; i++)
                     {
                         bool thok = false;
                         for (int j = 0; j < str1.Length; j++)
                         {
-                            if(x.Substring(i,1)== str1.Substring(j, 1))
+                            if (x.Substring(i, 1) == str1.Substring(j, 1))
                             {
                                 tx += str2.Substring(j, 1);
                                 thok = true;
@@ -74,9 +67,7 @@ namespace Core.Comm
                             }
                         }
                         if (!thok)
-                        {
                             tx += x.Substring(i, 1);
-                        }
                     }
                     x = tx;
                 }
@@ -86,34 +77,22 @@ namespace Core.Comm
                 regstr = regstr.Replace("xform", "");
                 string[] reglist = new string[0];
                 if (regstr.LastIndexOf('/') > 0)
-                {
                     reglist = regstr.Split('/');
-                }
                 else if (regstr.LastIndexOf("  ") >= 0)
-                {
-                    reglist = regstr.Replace("  "," ").Split(' ');
-                }
+                    reglist = regstr.Replace("  ", " ").Split(' ');
                 else if (regstr.LastIndexOf(' ') > 0)
-                {
                     reglist = regstr.Split(' ');
-                }
                 else if (regstr.LastIndexOf('=') > 0)
-                {
                     reglist = regstr.Split('=');
-                }
                 if (reglist.Length > 2)
                 {
                     RegexOptions ops = RegexOptions.Multiline;
                     Regex r = new Regex(reglist[1], ops);
                     if (r.IsMatch(x))
-                    {
                         x = r.Replace(x, reglist[2]);
-                    }
                 }
-
             }
             return x;
         }
-        
     }
 }

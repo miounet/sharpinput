@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Core.Comm
 {
     public class YAMLHelp
     {
         // 所有行
-        private String[] lines;
+        private readonly string[] lines;
         // 格式化为节点
         private List<Node> nodeList = new List<Node>();
         // 文件所在地址
-        private String path;
+        private readonly string path;
 
-        public YAMLHelp(String path)
+        public YAMLHelp(string path)
         {
             if (string.IsNullOrEmpty(path)) return;
             this.path = path;
@@ -25,7 +23,7 @@ namespace Core.Comm
 
             for (int i = 0; i < lines.Length; i++)
             {
-                String line = lines[i];
+                string line = lines[i];
                 if (line.Trim() == "")
                 {
                     Console.WriteLine("空白行，行号：" + (i + 1));
@@ -37,17 +35,17 @@ namespace Core.Comm
                     continue;
                 }
 
-                String[] kv = Regex.Split(line, ":", RegexOptions.IgnoreCase);
-                findPreSpace(line);
+                string[] kv = Regex.Split(line, ":", RegexOptions.IgnoreCase);
+                _ = findPreSpace(line);
                 Node node = new Node();
-                node.space = findPreSpace(line);
-                node.name = kv[0].Trim();
+                node.Space = findPreSpace(line);
+                node.Name = kv[0].Trim();
 
                 // 去除前后空白符
-                String fline = line.Trim();
+                string fline = line.Trim();
                 int first = fline.IndexOf(':');
-                node.value = first == fline.Length - 1 ? null : fline.Substring(first + 2, fline.Length - first - 2);
-                node.parent = findParent(node.space);
+                node.Value = first == fline.Length - 1 ? null : fline.Substring(first + 2, fline.Length - first - 2);
+                node.Parent = findParent(node.Space);
                 nodeList.Add(node);
             }
 
@@ -55,34 +53,28 @@ namespace Core.Comm
         }
 
         // 修改值 允许key为多级 例如：spring.datasource.url
-        public void modify(String key, String value)
+        public void modify(string key, string value)
         {
             Node node = findNodeByKey(key);
             if (node != null)
-            {
-                node.value = value;
-            }
+                node.Value = value;
         }
 
         // 读取值
-        public String read(String key, String value)
+        public string read(string key, string value)
         {
             Node node = findNodeByKey(key);
-            if (node != null)
-            {
-                return node.value;
-            }
-            return null;
+            return node != null ? node.Value : null;
         }
 
         // 根据key找节点
-        public Node findNodeByKey(String key)
+        public Node findNodeByKey(string key)
         {
-            String[] ks = key.Split('.');
+            string[] ks = key.Split('.');
             for (int i = 0; i < nodeList.Count; i++)
             {
                 Node node = nodeList[i];
-                if (node.name == ks[ks.Length - 1])
+                if (node.Name == ks[ks.Length - 1])
                 {
                     // 判断父级
                     Node tem = node;
@@ -90,24 +82,21 @@ namespace Core.Comm
                     int count = 1;
                     for (int j = ks.Length - 2; j >= 0; j--)
                     {
-                        if (tem.parent.name == ks[j])
+                        if (tem.Parent.Name == ks[j])
                         {
                             count++;
                             // 继续检查父级
-                            tem = tem.parent;
+                            tem = tem.Parent;
                         }
                     }
 
                     if (count == ks.Length)
-                    {
                         return node;
-                    }
                 }
             }
             return null;
         }
 
- 
         // 格式化
         public void formatting()
         {
@@ -116,10 +105,8 @@ namespace Core.Comm
             for (int i = 0; i < nodeList.Count; i++)
             {
                 Node node = nodeList[i];
-                if (node.parent == null)
-                {
+                if (node.Parent == null)
                     parentNode.Add(node);
-                }
             }
 
             List<Node> fNodeList = new List<Node>();
@@ -137,9 +124,9 @@ namespace Core.Comm
             nodeList = fNodeList;
         }
 
-
         // 层级
-        int tier = 0;
+        private int tier = 0;
+
         // 查找孩子并进行分层
         public void findChildren(Node node, List<Node> fNodeList)
         {
@@ -149,9 +136,9 @@ namespace Core.Comm
             for (int i = 0; i < nodeList.Count; i++)
             {
                 Node item = nodeList[i];
-                if (item.parent == node)
+                if (item.Parent == node)
                 {
-                    item.tier = tier;
+                    item.Tier = tier;
                     fNodeList.Add(item);
                     findChildren(item, fNodeList);
                 }
@@ -162,20 +149,16 @@ namespace Core.Comm
         }
 
         //查找前缀空格数量
-        private int findPreSpace(String str)
+        private int findPreSpace(string str)
         {
             List<char> chars = str.ToList();
             int count = 0;
             foreach (char c in chars)
             {
                 if (c == ' ')
-                {
                     count++;
-                }
                 else
-                {
                     break;
-                }
             }
             return count;
         }
@@ -183,41 +166,34 @@ namespace Core.Comm
         // 根据缩进找上级
         private Node findParent(int space)
         {
-
             if (nodeList.Count == 0)
-            {
                 return null;
-            }
-            else
+
+            // 倒着找上级
+            for (int i = nodeList.Count - 1; i >= 0; i--)
             {
-                // 倒着找上级
-                for (int i = nodeList.Count - 1; i >= 0; i--)
-                {
-                    Node node = nodeList[i];
-                    if (node.space < space)
-                    {
-                        return node;
-                    }
-                }
-                // 如果没有找到 返回null
-                return null;
+                Node node = nodeList[i];
+                if (node.Space < space)
+                    return node;
             }
+
+            // 如果没有找到 返回null
+            return null;
         }
 
         // 私有节点类
         public class Node
         {
             // 名称
-            public String name { get; set; }
+            public string Name { get; set; }
             // 值
-            public String value { get; set; }
+            public string Value { get; set; }
             // 父级
-            public Node parent { get; set; }
+            public Node Parent { get; set; }
             // 前缀空格
-            public int space { get; set; }
+            public int Space { get; set; }
             // 所属层级
-            public int tier { get; set; }
+            public int Tier { get; set; }
         }
     }
-  
 }

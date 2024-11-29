@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -19,7 +18,7 @@ namespace Core.Base
         public string[] EnDit = null;
         public List<string> ClouddDit = new List<string>();
         public static string AppPath = string.Empty;
-        public Dictionary<string,string> PinYi = new Dictionary<string, string>();//拼音注音
+        public Dictionary<string, string> PinYi = new Dictionary<string, string>();//拼音注音
         public Dictionary<string, string> CfDict = new Dictionary<string, string>();//拆分数据
         public Dictionary<string, string> S2TDict = new Dictionary<string, string>();//繁体数据
         public string MasterDitPath = string.Empty;
@@ -35,10 +34,10 @@ namespace Core.Base
         public string[] qjywdict;//全角英文按键字典
         public string[] bjywdict;//半角英文按键字典
         public string[] onedict;//左右一简
-     
-        public Dictionary<string, List<string>> linkdictp=new Dictionary<string, List<string>>();//汉字联想的词库
+
+        public Dictionary<string, List<string>> linkdictp = new Dictionary<string, List<string>>();//汉字联想的词库
         public int MaxLen = 40;//上屏编码最大长度
-        public  List<MapintKey> mapsortkeys = new List<MapintKey>();
+        public List<MapintKey> mapsortkeys = new List<MapintKey>();
         public List<MapintKey> mapkeys = new List<MapintKey>();
         /// <summary>
         /// 索引建好
@@ -50,14 +49,14 @@ namespace Core.Base
         /// 2并击助手状态
         /// </summary>
         public ushort IsChinese = 1;
-      
+
         /// <summary>
         /// 0为sendinput 发送
         /// 1为剪贴板方式发送
         /// </summary>
         public short OutType = 0;
         public bool SelfOut = false;
-         
+
         /// <summary>
         /// 获取输入法状态栏背景文件名
         /// </summary>
@@ -68,8 +67,8 @@ namespace Core.Base
                 , (this.IsQJ ? "q" : "b"), (this.IsJT ? "j" : "f")));
             return skin;
         }
- 
-      
+
+
         /// <summary>
         /// true激活,false禁用/隐藏输入法
         /// </summary>
@@ -91,14 +90,14 @@ namespace Core.Base
         /// 参与的编码
         /// </summary>
         public string mdcode = "qwertyuiopasdfghjkl;'zxcvbnm,./QWERTYUIOPASDFGHJKL:ZXCVBNM<>?!`~，。、；@*_#$%^&0123456789";
-       
-        public  bool isActiveInput = true;
-        public  bool IsPressShift = false;
-        public  bool IsPressAlt = false;
+
+        public bool isActiveInput = true;
+        public bool IsPressShift = false;
+        public bool IsPressAlt = false;
         public bool IsPressLAlt = false;
         public bool IsPressRAlt = false;
-        public  bool IsPressCtrl = false;
-        public  bool IsPressWin = false;
+        public bool IsPressCtrl = false;
+        public bool IsPressWin = false;
         public short IsPresAltPos = 0;
         public static string[] srleftdict;//速录左手一简
         public static string[] srrightdict;//速录右手一简
@@ -106,15 +105,15 @@ namespace Core.Base
         /// 单字输出模式
         /// </summary>
         public static bool SingleInput = false;//单字模式输出
- 
+
         #endregion
 
         #region static
-      
+
         public static string CDPath = string.Empty;//当前词库目录
         public static string ZFPath = string.Empty;//当前指法目录
         public static string PFPath = string.Empty;//当前皮肤
-        public static bool OpenCould=true;//云词库
+        public static bool OpenCould = true;//云词库
         public static bool AutoUpdate = true;//自动升级 
         public static bool OpenLink = true;//智能联想
         public static bool AutoZJ = false;//自动
@@ -153,7 +152,7 @@ namespace Core.Base
         public static bool imgsend = false;//以图片方式粘贴上屏
         public static bool zjsend = false;//以整句方式粘贴上屏
         public static int outtype = 0;//0默认,1剪贴板模式，2嵌入模式
-        public static int SkinIndex=0;
+        public static int SkinIndex = 0;
         public static bool datacf = false;//显示汉字拆分
         public static string cffontname = "宋体";
         public static bool imghh = false;//图片换行
@@ -164,10 +163,10 @@ namespace Core.Base
         public static bool onesp = true;//一码上屏
         public static bool select3 = false;//开启 空格＋第3码 右手选2，左手选3
         public static int spaceaout = 0;//0 上屏首选，1当1个重码时上屏次选，2强制上屏次选 3强制，顶上首之词
-        public static bool outdatetime=true;
+        public static bool outdatetime = true;
         public static bool autodata = true;
         public static bool useregular = false;
-        public IndexManger DictIndex = new IndexManger ();
+        public IndexManger DictIndex = new IndexManger();
         #endregion
 
         /// <summary>
@@ -176,7 +175,7 @@ namespace Core.Base
         /// <param name="inputstr"></param>
         /// <param name="dream"></param>
         /// <returns></returns>
-        public virtual string[] GetInputValue(string inputstr, bool dream = false,int ncount=0,bool isright=false)
+        public virtual string[] GetInputValue(string inputstr, bool dream = false, int ncount = 0, bool isright = false)
         {
             string valuestr = "";
             if (IsChinese == 1)
@@ -190,7 +189,6 @@ namespace Core.Base
                     int pcount = inputstr.Length > 2 ? 188 : 66;// 30;// SingleInput == true ? 50 : 70;
                     if (ncount > 0) pcount = ncount;
 
-
                     #region 取字
                     string[] mdict = null;
                     if (indexComplete)
@@ -201,10 +199,7 @@ namespace Core.Base
                             first = poi.Start;
                             last = poi.End;
                         }
-                        else
-                        {
-                            last = 0;
-                        }
+                        else last = 0;
                     }
                     else last = 0;
                     if (mdict == null)
@@ -239,8 +234,6 @@ namespace Core.Base
                                         count++;
                                     }
                                 }
-
-
                             }
                         }
                         if (count > pcount) break;
@@ -252,40 +245,29 @@ namespace Core.Base
                     {
                         string prostr = GetProInputValue(inputstr, 20);
                         valuestr += prostr;
-                    }
-                    if (count < 28)
                         GetUserDict(inputstr, ref valuestr);
-
+                    }
                 }
-                else
-                {
-                    GetCloudDict(inputstr, ref valuestr);
-                }
+                else GetCloudDict(inputstr, ref valuestr);
                 #endregion
-
             }
             else if (IsChinese == 2)
             {
                 if (!bjzckgsp)
                     GetUserDict(inputstr, ref valuestr);
             }
-            else
-            {
-                valuestr = string.Format("0z|{0}|", inputstr);
-            }
+            else valuestr = string.Format("0z|{0}|", inputstr);
 
             if (valuestr.Length > 0)
             {
-                if (inputstr.Length == 1 && IsChinese == 1 && inputstr!="'")
+                if (inputstr.Length == 1 && IsChinese == 1 && inputstr != "'")
                 {
                     string onestr = GetLROne(inputstr, !isright);
-                    if (!string.IsNullOrEmpty(onestr) && valuestr.Split(new string[1] { "\n" }, StringSplitOptions.RemoveEmptyEntries)[0].Split('|')[1]!=onestr)
-                    {
-                        valuestr = "292184z|"+ onestr + "|\n" + valuestr;
-                    }
+                    if (!string.IsNullOrEmpty(onestr) && valuestr.Split(new string[1] { "\n" }, StringSplitOptions.RemoveEmptyEntries)[0].Split('|')[1] != onestr)
+                        valuestr = "292184z|" + onestr + "|\n" + valuestr;
                 }
                 valuestr = valuestr.Replace("^", "＾");
-               
+
                 if (!this.IsJT)
                 {
                     //转繁体
@@ -305,21 +287,18 @@ namespace Core.Base
             return null;
         }
 
-
         public virtual string[] GetInputOneValue(string inputstr)
         {
             string valuestr = "";
             if (IsChinese == 1)
             {
                 #region 中文处理
-                if (inputstr.Length == 0 || inputstr.Length>1) return null;
+                if (inputstr.Length == 0 || inputstr.Length > 1) return null;
                 if (!inputstr.StartsWith("'"))
                 {
                     int count = 0;
                     int first = 0, last = MasterDit.Length - 1;
                     int pcount = inputstr.Length > 2 ? 2 : 2;
-      
-
 
                     #region 取字
                     string[] mdict = null;
@@ -331,12 +310,10 @@ namespace Core.Base
                             first = poi.Start;
                             last = poi.End;
                         }
-                        else
-                        {
-                            last = 0;
-                        }
+                        else last = 0;
                     }
                     else last = 0;
+
                     if (mdict == null)
                         mdict = MasterDit;
 
@@ -369,8 +346,6 @@ namespace Core.Base
                                         count++;
                                     }
                                 }
-
-
                             }
                         }
                         if (count > pcount) break;
@@ -382,19 +357,13 @@ namespace Core.Base
                     {
                         string prostr = GetProInputValue(inputstr, 20);
                         valuestr += prostr;
-                    }
-                    if (count < 28)
                         GetUserDict(inputstr, ref valuestr);
-
+                    }
                 }
-                else
-                {
-                    GetCloudDict(inputstr, ref valuestr);
-                }
+                else GetCloudDict(inputstr, ref valuestr);
                 #endregion
                 if (valuestr.Length > 0)
                 {
-
                     if (!this.IsJT)
                     {
                         //转繁体
@@ -411,16 +380,15 @@ namespace Core.Base
                     return vsa;
                 }
             }
-            
+
             return null;
         }
 
         public string S2TConv(string s)
         {
             if (S2TDict.Count <= 0)
-            {
                 return Microsoft.VisualBasic.Strings.StrConv(s, Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0);
-            }
+
             string ss = "";
             if (s.IndexOf("|") > 0)
             {
@@ -428,7 +396,7 @@ namespace Core.Base
                 for (int ii = 0; ii < s.Length; ii++)
                 {
                     bool en = false;
-                    char[] c = s.Substring(ii,1).ToCharArray();
+                    char[] c = s.Substring(ii, 1).ToCharArray();
                     for (int i = 0; i < s.Substring(ii, 1).Length; i++)
                     {
                         if ((int)c[i] <= 127)
@@ -442,26 +410,16 @@ namespace Core.Base
                     {
                         if (cs.Length > 0)
                         {
-
-
                             if (S2TDict.ContainsKey(cs))
-                            {
                                 ss += S2TDict[cs].Split(' ')[0];
-                            }
                             else
                             {
                                 if (cs.Length > 1)
-                                {
                                     for (int i = 0; i < cs.Length; i++)
-                                    {
-                                        if (S2TDict.ContainsKey(cs.Substring(i,1)))
-                                        {
+                                        if (S2TDict.ContainsKey(cs.Substring(i, 1)))
                                             ss += S2TDict[cs.Substring(i, 1)].Split(' ')[0];
-                                        }
                                         else
                                             ss += Microsoft.VisualBasic.Strings.StrConv(cs.Substring(i, 1), Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0);
-                                    }
-                                }
                                 else
                                     ss += Microsoft.VisualBasic.Strings.StrConv(cs, Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0);
                             }
@@ -470,9 +428,7 @@ namespace Core.Base
                         ss += s.Substring(ii, 1);
                     }
                     else
-                    {
                         cs += s.Substring(ii, 1);
-                    }
                 }
             }
             else
@@ -480,18 +436,15 @@ namespace Core.Base
                 for (int i = 0; i < s.Length; i++)
                 {
                     if (S2TDict.ContainsKey(s.Substring(i, 1)))
-                    {
                         ss += S2TDict[s.Substring(i, 1)].Split(' ')[0];
-                    }
                     else
-                    {
                         ss += Microsoft.VisualBasic.Strings.StrConv(s.Substring(i, 1), Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0);
-                    }
                 }
             }
             return ss;
         }
-        public bool UpdatePos(string inputstr, int pos,int page=1,int pagesize=9)
+
+        public bool UpdatePos(string inputstr, int pos, int page = 1, int pagesize = 9)
         {
             try
             {
@@ -523,9 +476,7 @@ namespace Core.Base
                         for (int i = first; i <= last; i++)
                         {
                             if (fpos == 0 && mdict[i].Split(' ')[0].StartsWith(inputstr))
-                            {
                                 fpos = i;
-                            }
 
                             if (mdict[i].Split(' ')[0] == inputstr)
                             {
@@ -548,9 +499,8 @@ namespace Core.Base
                                 else
                                 {
                                     if (mdict[i].Split(' ').Length <= pos)
-                                    {
                                         continue;
-                                    }
+
                                     string strarr = mdict[i];
                                     string fcode = strarr.Split(' ')[0];
                                     string fvalue = strarr.Substring(strarr.Split(' ')[0].Length).Trim();//获取汉字
@@ -569,17 +519,10 @@ namespace Core.Base
                                 }
 
                                 break;
-
                             }
-
-
                         }
                         if (!jpok)
-                        {
-                            string temp = mdict[fpos];
-                            mdict[fpos] = mdict[fpos + pos - 1];
-                            mdict[fpos + pos - 1] = temp;
-                        }
+                            (mdict[fpos + pos - 1], mdict[fpos]) = (mdict[fpos], mdict[fpos + pos - 1]);
                         jpok = false;
                         if (indexComplete)
                         {
@@ -595,9 +538,7 @@ namespace Core.Base
                         for (int i = first; i <= last; i++)
                         {
                             if (fpos == 0 && mdict[i].Split(' ')[0].StartsWith(inputstr))
-                            {
                                 fpos = i;
-                            }
                             if (mdict[i].Split(' ')[0] == inputstr)
                             {
                                 xtcount++;
@@ -619,9 +560,7 @@ namespace Core.Base
                                 else
                                 {
                                     if (mdict[i].Split(' ').Length <= pos)
-                                    {
                                         continue;
-                                    }
                                     string strarr = mdict[i];
                                     string fcode = strarr.Split(' ')[0];
                                     string fvalue = strarr.Substring(strarr.Split(' ')[0].Length).Trim();//获取汉字
@@ -640,10 +579,7 @@ namespace Core.Base
                                 }
 
                                 break;
-
                             }
-
-
                         }
                         if (!jpok)
                         {
@@ -653,11 +589,9 @@ namespace Core.Base
                         }
 
                         #endregion
-
                     }
 
                     #endregion
-
                 }
             }
             catch
@@ -683,7 +617,8 @@ namespace Core.Base
                 if (ProDit == null) return valuestr;
                 int count = 0;
                 int first = 0, last = ProDit.Length - 1;
-                int pcount = 30;// SingleInput == true ? 50 : 70;
+                int pcount = 30;
+                // SingleInput == true ? 50 : 70;
                 if (ncount > 0) pcount = ncount;
                 #region 取字
                 if (indexComplete)
@@ -722,10 +657,7 @@ namespace Core.Base
                                 count++;
                             }
                         }
-
-
                     }
-
                     if (count > pcount) break;
                 }
 
@@ -759,7 +691,6 @@ namespace Core.Base
             }
         }
 
-
         /// <summary>
         /// 获取Cloud词组/临时拼音
         /// </summary>
@@ -769,12 +700,10 @@ namespace Core.Base
         {
             if (inputstr.StartsWith("'"))
             {
-
                 valuestr = "";
                 int count = 0;
                 if (inputstr.Length == 1) inputstr = "a";
                 else inputstr = inputstr.Substring(1);
-
 
                 foreach (var s in ClouddDit.FindAll(f => f.StartsWith(inputstr)))
                 {
@@ -793,6 +722,7 @@ namespace Core.Base
             }
 
         }
+
         /// <summary>
         /// 按输入获取字词
         /// </summary>
@@ -826,7 +756,7 @@ namespace Core.Base
                     string fcode = strarr.Split(' ')[0];
                     string fvalue = strarr.Substring(strarr.Split(' ')[0].Length).Trim();//获取单词
                     int startint = fcode.IndexOf(inputstr) + inputstr.Length;
- 
+
                     if (valuestr.IndexOf("|" + fvalue + "|") < 0)
                     {
                         //去重
@@ -841,10 +771,8 @@ namespace Core.Base
             #endregion
             #endregion
 
-
             if (valuestr.Length > 0)
             {
-
                 string[] vsa = valuestr.Split(new string[1] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < vsa.Length; i++)
                     vsa[i] = Comm.Function.ReplaceSystem(vsa[i]);
@@ -853,7 +781,6 @@ namespace Core.Base
 
             return null;
         }
- 
 
         /// <summary>
         /// 获取左右一简
@@ -861,14 +788,14 @@ namespace Core.Base
         /// <param name="input"></param>
         /// <param name="left"></param>
         /// <returns></returns>
-        public virtual string GetLROne(string code, bool left,int pos=0)
+        public virtual string GetLROne(string code, bool left, int pos = 0)
         {
             string vv = string.Empty;
             pos = pos - 1;
             if (pos < 0) pos = 0;
             foreach (var dit in onedict)
             {
-                if (dit.StartsWith(code + "="))
+                if (dit.StartsWith($"{code}="))
                 {
                     try
                     {
@@ -876,25 +803,17 @@ namespace Core.Base
                         {
                             vv = dit.Split('=')[1].Split(' ')[0];
                             if (vv.IndexOf("_") > 0 && pos < vv.Split('_').Length)
-                            {
                                 vv = vv.Split('_')[pos];
-                            }
                             else if (vv.IndexOf("_") > 0 && pos >= vv.Split('_').Length)
-                            {
                                 vv = vv.Split('_')[vv.Split('_').Length - 1];
-                            }
                         }
                         else
                         {
                             vv = dit.Split('=')[1].Split(' ')[1];
                             if (vv.IndexOf("_") > 0 && pos < vv.Split('_').Length)
-                            {
                                 vv = vv.Split('_')[pos];
-                            }
                             else if (vv.IndexOf("_") > 0 && pos >= vv.Split('_').Length)
-                            {
                                 vv = vv.Split('_')[vv.Split('_').Length - 1];
-                            }
                         }
                         break;
                     }
@@ -914,14 +833,12 @@ namespace Core.Base
             if (string.IsNullOrEmpty(vv))
             {
                 //取词库本身的一级简码
-                var v= GetInputOneValue(code);
-                if(v!=null && v.Length > 0)
+                var v = GetInputOneValue(code);
+                if (v != null && v.Length > 0)
                 {
                     vv = v[0].Split('|')[1];
-                    if (left==false && v.Length >1 && v[1].Length>0 && v[1].Split('|')[2].Length==0)
-                    {
+                    if (left == false && v.Length > 1 && v[1].Length > 0 && v[1].Split('|')[2].Length == 0)
                         vv = v[1].Split('|')[1];
-                    }
                 }
             }
             return vv;
@@ -945,11 +862,10 @@ namespace Core.Base
                             pos.Letter = ts;
                             pos.Start = i;
                             pos.End = i;
-                            if (p==1 && dict[i].Split(' ')[0].Length > 1)
+                            if (p == 1 && dict[i].Split(' ')[0].Length > 1)
                                 pos.subdict.Add(dict[i]);
                             posl.Add(pos);
                         }
-
                     }
                     else
                     {
@@ -983,7 +899,7 @@ namespace Core.Base
         /// <returns></returns>
         public string CheckKeysString(Keys keys)
         {
-            if ((this.IsChinese==0 && keys == Keys.Space) || (useregular && keys == Keys.Space)) return " ";
+            if ((this.IsChinese == 0 && keys == Keys.Space) || (useregular && keys == Keys.Space)) return " ";
             string str = "";
             if (this.IsQJ)
             {
@@ -1269,7 +1185,7 @@ namespace Core.Base
                                 {
                                     if (keys.ToString() == bjywdict[i].Split('=')[0] && bjywdict[i].Split(' ').Length > 1)
                                     {
-                                        if (bjywdict[i].IndexOf("== +")>0)
+                                        if (bjywdict[i].IndexOf("== +") > 0)
                                         {
                                             str = "+";
                                         }
@@ -1311,7 +1227,7 @@ namespace Core.Base
         /// </summary>
         /// <param name="codechar"></param>
         /// <returns></returns>
-        public  bool CheckSRCode(string codechar)
+        public bool CheckSRCode(string codechar)
         {
             if (codechar == "~") return false;
             bool valuebool = mapkeys.FindAll(f => f.ZM == codechar).Count > 0;
@@ -1325,10 +1241,10 @@ namespace Core.Base
         /// <returns></returns>
         public bool CheckCode(string codechar)
         {
-             bool valuebool = false;
+            bool valuebool = false;
             for (int i = 0; i < mdcode.Length; i++)
             {
-                if (mdcode.Substring(i,1) == codechar)
+                if (mdcode.Substring(i, 1) == codechar)
                 {
                     valuebool = true;
                     break;
@@ -1347,7 +1263,7 @@ namespace Core.Base
 
             return count == s.Length;
         }
-        public   bool SRRight(string s)
+        public bool SRRight(string s)
         {
             int count = 0;
             for (int i = 0; i < s.Length; i++)
@@ -1406,7 +1322,7 @@ namespace Core.Base
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public  string SRSort(string v)
+        public string SRSort(string v)
         {
 
             string s = string.Empty;
@@ -1434,7 +1350,7 @@ namespace Core.Base
         /// <returns></returns>
         public string CovertStr(string v, bool px = true)
         {
-            if (InputMode.closebj && v.Length<4) return v;
+            if (InputMode.closebj && v.Length < 4) return v;
             bool hleft = false;
             bool hright = false;
             string oldv = v;
@@ -1442,7 +1358,6 @@ namespace Core.Base
             v = v.Replace("，", ",").Replace("．", ".");
             if (v == " " && px)
             {
-
                 return oldv;
             }
             if (v.Length == 1 && !CheckSRCode(v) && px) return oldv;
@@ -1495,8 +1410,8 @@ namespace Core.Base
             {
                 //排序
                 var node = Win.WinInput.settingYaml.findNodeByKey("alphabet");
-                if (node != null && node.name.Length > 0 && node.value.Length > 2)
-                    v = Comm.RegHelp.RegexReplace(v, node.name + ":" + node.value);
+                if (node != null && node.Name.Length > 0 && node.Value.Length > 2)
+                    v = Comm.RegHelp.RegexReplace(v, node.Name + ":" + node.Value);
 
                 foreach (var m in mapkeys)
                 {
@@ -1519,7 +1434,7 @@ namespace Core.Base
                     {
                         foreach (var item in nodes)
                         {
-                            v = Comm.RegHelp.RegexReplace(v, item.value);
+                            v = Comm.RegHelp.RegexReplace(v, item.Value);
                         }
                     }
                 }
@@ -1549,7 +1464,7 @@ namespace Core.Base
                     {
                         foreach (var item in nodes)
                         {
-                            v = Comm.RegHelp.RegexReplace(v, item.value);
+                            v = Comm.RegHelp.RegexReplace(v, item.Value);
                         }
                     }
                 }
@@ -1615,10 +1530,7 @@ namespace Core.Base
         public static extern IntPtr GetDC(IntPtr hwnd);
         public static IntPtr deskDC = GetDC(IntPtr.Zero);
         private static BufferedGraphics grafx = null;
-        public static IntPtr GetTopDc()
-        {
-            return GetDC(IntPtr.Zero);
-        }
+        public static IntPtr GetTopDc() => GetDC(IntPtr.Zero);
         private void ShowWork()
         {
             while (!Break)
@@ -1637,12 +1549,11 @@ namespace Core.Base
                         continue;
                     }
                     if ((Win.WinInput.InputStatus.inputstr.Length > 0 || InputStatusFrm.Dream) && !Win.WinInput.InputStatus.Visible) { Show = true; Win.WinInput.InputStatus.ShowWindow(true); }
-                   
-                    
+
+
                     //要显示
                     if (InputStatusFrm.cachearry == null) continue;
                     DealView();
-
 
                     if (Win.WinInput.InputStatus.ViewType == 0)
                     {
@@ -1660,11 +1571,9 @@ namespace Core.Base
                     {
                         System.Threading.Thread.Sleep(50);
                         Win.WinInput.InputStatus.Refresh();
-                        
+
                         continue;
                     }
-
-     
                 }
                 catch { }
             }
@@ -1697,15 +1606,14 @@ namespace Core.Base
                 vw += SkinFontH;
             }
             if (vw < 100) vw = 100;
-     
+
             return vw;
         }
         public static int GetWidth(string str)
         {
             return 5 + str.Length * SkinFontW;
-         
         }
-       
+
         private static void SView(int inputy)
         {
             SolidBrush bstring = new SolidBrush(Skinbstring);
@@ -1717,11 +1625,11 @@ namespace Core.Base
                 && !InputStatusFrm.Dream) //分页数显示
                 grafx.Graphics.DrawString(string.Format("{0}/{1}", Win.WinInput.InputStatus.PageNum
                     , (Win.WinInput.InputStatus.valuearry.Length % Win.WinInput.InputStatus.PageSize == 0 ? Win.WinInput.InputStatus.valuearry.Length / Win.WinInput.InputStatus.PageSize : Win.WinInput.InputStatus.valuearry.Length / Win.WinInput.InputStatus.PageSize + 1))
-                    , new Font("", 10F), bstring, new Point(Left+Width - 44, Top + 4));
+                    , new Font("", 10F), bstring, new Point(Left + Width - 44, Top + 4));
             for (int i = 0; i < inputv.Length; i++)
             {
                 if (string.IsNullOrEmpty(inputv[i])) break;
-                string v =InputStatusFrm.GetCutStr(inputv[i]);
+                string v = InputStatusFrm.GetCutStr(inputv[i]);
                 string pos = i == 9 ? "0." : (i + 1).ToString() + ".";
                 Font tfont = new Font(SkinFontName, SkinFontSize);
                 int vw = GetWidth(inputv[i]);
@@ -1758,7 +1666,7 @@ namespace Core.Base
                 string v = InputStatusFrm.GetCutStr(inputv[i]);
                 string pos = i == 9 ? "0." : (i + 1).ToString() + ".";
                 Font tfont = new Font(SkinFontName, SkinFontSize);
-                 
+
                 if (i == 0)
                     grafx.Graphics.DrawString(pos + v, tfont, fbcstring, new Point(Left + wx, Top + inputy));
                 else
@@ -1769,7 +1677,7 @@ namespace Core.Base
                 else
                     wx += InputMode.lbinputv[i].PreferredWidth - 7;
 
-                grafx.Graphics.DrawString(inputc[i], new Font("宋体", SkinFontSize - 1), bcstring, new Point(Left + wx, Top+inputy));
+                grafx.Graphics.DrawString(inputc[i], new Font("宋体", SkinFontSize - 1), bcstring, new Point(Left + wx, Top + inputy));
                 if (string.IsNullOrEmpty(InputMode.lbinputc[i].Text))
                 {
                     wx += 4;
@@ -1825,7 +1733,6 @@ namespace Core.Base
 
         public void ClearShow()
         {
-
             this.Show = false;
         }
         public System.Threading.Thread workth = null;
@@ -1848,10 +1755,9 @@ namespace Core.Base
 
                 sworkth.Start();
             }
-
         }
     }
- 
+
 }
 
 /// <summary>
@@ -1866,21 +1772,21 @@ public class PosIndex
     public List<string> subdict = new List<string>();
     public string[] mdict = null;
     public List<PosIndex> SubIndex = new List<PosIndex>();
-
 }
+
 /// <summary>
-    /// 索引管理类
-    /// </summary>
-    public class IndexManger
-    {
-        public List<PosIndex>  IndexList=new List<PosIndex>();
-        public List<PosIndex> EnList = new List<PosIndex>();
-        public List<PosIndex> ProList = new List<PosIndex>();
+/// 索引管理类
+/// </summary>
+public class IndexManger
+{
+    public List<PosIndex> IndexList = new List<PosIndex>();
+    public List<PosIndex> EnList = new List<PosIndex>();
+    public List<PosIndex> ProList = new List<PosIndex>();
     /// <summary>
     /// 通过输入获取索引对象
     /// </summary>
     /// <param name="str">String.</param>
-    public PosIndex GetPos(string str, ref string[] dict,bool f=true)
+    public PosIndex GetPos(string str, ref string[] dict, bool f = true)
     {
         dict = null;
         if (str.Length == 1)
@@ -1910,43 +1816,45 @@ public class PosIndex
         return null;
     }
 
-        /// <summary>
-        /// 通过输入获取索引对象
-        /// </summary>
-        /// <param name="str">String.</param>
-        public PosIndex GetEnPos(string str)
+    /// <summary>
+    /// 通过输入获取索引对象
+    /// </summary>
+    /// <param name="str">String.</param>
+    public PosIndex GetEnPos(string str)
+    {
+        if (str.Length == 1)
         {
-            if (str.Length == 1) {
-                return EnList.Find (i => i.Letter == str);
-            }
-            else if (str.Length > 1)
-            {
-                var o = EnList.Find(i => i.Letter == str.Substring(0, 1));
-                return o;
-            }
-
-            return null;
+            return EnList.Find(i => i.Letter == str);
+        }
+        else if (str.Length > 1)
+        {
+            var o = EnList.Find(i => i.Letter == str.Substring(0, 1));
+            return o;
         }
 
-        /// <summary>
-        /// 通过输入获取索引对象
-        /// </summary>
-        /// <param name="str">String.</param>
-        public PosIndex GetProPos(string str)
-        {
-            if (str.Length == 1)
-            {
-                return ProList.Find(i => i.Letter == str);
-            }
-            else if (str.Length > 1)
-            {
-                var o = ProList.Find(i => i.Letter == str.Substring(0, 1));
-                return o;
-            }
-
-            return null;
-        }
+        return null;
     }
+
+    /// <summary>
+    /// 通过输入获取索引对象
+    /// </summary>
+    /// <param name="str">String.</param>
+    public PosIndex GetProPos(string str)
+    {
+        if (str.Length == 1)
+        {
+            return ProList.Find(i => i.Letter == str);
+        }
+        else if (str.Length > 1)
+        {
+            var o = ProList.Find(i => i.Letter == str.Substring(0, 1));
+            return o;
+        }
+
+        return null;
+    }
+}
+
 public class MapintKey
 {
     public string ZM = string.Empty;
@@ -1961,4 +1869,3 @@ public class MapintKey
     public bool left = false;
     public long keydown = 0;
 }
- 

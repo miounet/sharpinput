@@ -1,27 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
     [Serializable]
     public class RequestEntity
     {
-        public RequestEntity()
-        {
+        public RequestEntity() { }
 
-        }
         // Fields
         public string Content;
         public string OptCommand;
 
         // Methods
-    
     }
-
-
 
     [Serializable]
     public class CheckEntity
@@ -35,6 +27,7 @@ namespace Core
         // Methods
         public CheckEntity() { }
     }
+
     [Serializable]
     public class UpdateDictEnt
     {
@@ -50,6 +43,7 @@ namespace Core
         // Methods
         public UpdateDictEnt() { }
     }
+
     public enum OptCom
     {
         GetUpdateDict,
@@ -66,24 +60,18 @@ namespace Core
         AddKHOpt,
         UpdateUserPwd
     }
+
     [Serializable]
     public class ColdDictEntity
     {
         // Fields
-     
         public bool NextHave;
-  
         public int Pos;
-      
         public List<string> Value;
 
         // Methods
         public ColdDictEntity() { }
-
-  
-
     }
-
 
     [Serializable]
     public class ProDictEntity
@@ -96,7 +84,4 @@ namespace Core
         // Methods
         public ProDictEntity() { }
     }
-
-
-
 }

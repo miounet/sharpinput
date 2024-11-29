@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Config
 {
@@ -17,7 +13,9 @@ namespace Core.Config
             string ss = string.Empty;
 
             foreach (var s in setting)
-                if (s.StartsWith(skey + "=")) ss = s.Replace(skey + "=","");
+                if (s.StartsWith($"{skey}="))
+                    ss = s.Replace($"{skey}=", "");
+
             return ss;
         }
     }

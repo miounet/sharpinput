@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace Core.Comm
 {
@@ -12,44 +11,29 @@ namespace Core.Comm
     {
         public string DictVersion { get; set; }
         public string DictDownUrl { get; set; }
- 
-
     }
 
- 
     public class UpdateSoftEnt
     {
- 
         public string ProductVer { get; set; }
         public string DownUrl { get; set; }
-
     }
 
     public class ApiClient
     {
         public static T JsonToObj<T>(string jsonString)
         {
-
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
-            {
-
                 return (T)new DataContractJsonSerializer(typeof(T)).ReadObject(ms);
-
-            }
-
         }
+
         public static string ToJson(object jsonObject)
         {
-
             using (var ms = new MemoryStream())
             {
-
                 new DataContractJsonSerializer(jsonObject.GetType()).WriteObject(ms, jsonObject);
-
                 return Encoding.UTF8.GetString(ms.ToArray());
-
             }
-
         }
 
         /// <summary>
@@ -69,26 +53,23 @@ namespace Core.Comm
                 {
                     if (reponse.Content.IndexOf("}") < 0)
                         reponse.Content = "{" + reponse.Content + "}";
-              
+
                     if (reponse.Content.IndexOf("srb_ver_info_s") > 0)
                     {
-                        c.DictVersion= reponse.Content.Substring(reponse.Content.IndexOf("srb_ver_info_s"), reponse.Content.IndexOf("srb_ver_info_e") - reponse.Content.IndexOf("srb_ver_info_s")).Replace("=", "").Replace("srb_ver_info_s", "");
+                        c.DictVersion = reponse.Content.Substring(reponse.Content.IndexOf("srb_ver_info_s"), reponse.Content.IndexOf("srb_ver_info_e") - reponse.Content.IndexOf("srb_ver_info_s")).Replace("=", "").Replace("srb_ver_info_s", "");
                         c.DictDownUrl = reponse.Content.Substring(reponse.Content.IndexOf("srb_down_info_s"), reponse.Content.IndexOf("srb_down_info_e") - reponse.Content.IndexOf("srb_down_info_s")).Replace("=", "").Replace("srb_down_info_s", "");
                     }
                     else
                         c = JsonToObj<UpdateEnt>(reponse.Content);
                 }
             }
-            catch
-            {
-
-            }
+            catch { }
             return c;
         }
+
         public static UpdateSoftEnt GetEnt(string url)
         {
             UpdateSoftEnt c = new UpdateSoftEnt();
-
             try
             {
                 c.ProductVer = Program.ProductVer;
@@ -99,19 +80,17 @@ namespace Core.Comm
                         reponse.Content = "{" + reponse.Content + "}";
                     if (reponse.Content.IndexOf("srb_ver_info_s") > 0)
                     {
-                        c.ProductVer = reponse.Content.Substring(reponse.Content.IndexOf("srb_ver_info_s"), reponse.Content.IndexOf("srb_ver_info_e")- reponse.Content.IndexOf("srb_ver_info_s")).Replace("=","").Replace("srb_ver_info_s","");
+                        c.ProductVer = reponse.Content.Substring(reponse.Content.IndexOf("srb_ver_info_s"), reponse.Content.IndexOf("srb_ver_info_e") - reponse.Content.IndexOf("srb_ver_info_s")).Replace("=", "").Replace("srb_ver_info_s", "");
                         c.DownUrl = reponse.Content.Substring(reponse.Content.IndexOf("srb_down_info_s"), reponse.Content.IndexOf("srb_down_info_e") - reponse.Content.IndexOf("srb_down_info_s")).Replace("=", "").Replace("srb_down_info_s", "");
                     }
                     else
                         c = JsonToObj<UpdateSoftEnt>(reponse.Content);
                 }
             }
-            catch
-            {
-
-            }
+            catch { }
             return c;
         }
+
         /// <summary>
         /// 获取dict更新地址
         /// </summary>
@@ -130,14 +109,9 @@ namespace Core.Comm
                 r.Content = Security.EncryptCommon(r.Content);
                 IAASResponse reponse = IAASRequest.Reauest(url, RequestMethod.POST, "", "", ToJson(r));
                 if (reponse.StatusCode == HttpStatusCode.OK)
-                {
                     c = JsonToObj<UpdateDictEnt>(reponse.Content);
-                }
             }
-            catch
-            {
-                
-            }
+            catch { }
             return c;
         }
 
@@ -159,13 +133,11 @@ namespace Core.Comm
                 r.Content = Security.EncryptCommon(r.Content);
                 IAASResponse reponse = IAASRequest.Reauest(url, RequestMethod.POST, "", "", ToJson(r));
                 if (reponse.StatusCode == HttpStatusCode.OK)
-                {
                     c = JsonToObj<ColdDictEntity>(reponse.Content);
-                }
             }
             catch
             {
-                c.NextHave = false; ;
+                c.NextHave = false;
             }
             return c;
         }
@@ -182,16 +154,11 @@ namespace Core.Comm
                 r.Content = Security.EncryptCommon(r.Content);
                 IAASResponse reponse = IAASRequest.Reauest(url, RequestMethod.POST, "", "", ToJson(r));
                 if (reponse.StatusCode == HttpStatusCode.OK)
-                {
                     c = JsonToObj<UpdateDictEnt>(reponse.Content);
-                }
             }
-            catch
-            {
-                
-            }
-             
+            catch { }
         }
+
         public static void EndDictUpdate(string url)
         {
             UpdateDictEnt c = new UpdateDictEnt();
@@ -204,18 +171,10 @@ namespace Core.Comm
                 r.Content = Security.EncryptCommon(r.Content);
                 IAASResponse reponse = IAASRequest.Reauest(url, RequestMethod.POST, "", "", ToJson(r));
                 if (reponse.StatusCode == HttpStatusCode.OK)
-                {
                     c = JsonToObj<UpdateDictEnt>(reponse.Content);
-                }
             }
-            catch
-            {
-              
-            }
-
+            catch { }
         }
-
- 
 
         /// <summary>
         /// 
@@ -223,11 +182,9 @@ namespace Core.Comm
         /// <param name="url"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static ProDictEntity GetProDict(string url, string key, List<UpdateDictEnt> pl=null)
+        public static ProDictEntity GetProDict(string url, string key, List<UpdateDictEnt> pl = null)
         {
             ProDictEntity c = new ProDictEntity();
-
-
             try
             {
                 c.DictList = pl;
@@ -238,9 +195,7 @@ namespace Core.Comm
                 r.Content = Security.EncryptCommon(r.Content);
                 IAASResponse reponse = IAASRequest.Reauest(url, RequestMethod.POST, "", "", ToJson(r));
                 if (reponse.StatusCode == HttpStatusCode.OK)
-                {
                     c = JsonToObj<ProDictEntity>(reponse.Content);
-                }
             }
             catch
             {
@@ -248,51 +203,34 @@ namespace Core.Comm
             }
             return c;
         }
-
-
     }
 
     public enum RequestMethod
     {
-
         POST,
-
         GET,
-
         DELETE,
-
         PUT,
-
     }
+
     public enum IAASResponseStatus
     {
-
         OK,
-
         Failed,
-
         Exception
-
     }
 
     public class IAASResponse
     {
-
         public IAASResponseStatus Stauts { get; set; }
-
         public string Content { get; set; }
-
         public HttpStatusCode StatusCode { get; set; }
-
         public string InputTxt { get; set; }
-
         public string RequestUrl { get; set; }
-
     }
 
     public class IAASRequest
     {
-
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
 
         //<summary>
@@ -300,136 +238,87 @@ namespace Core.Comm
         //</summary>
         private static readonly IWebProxy SystemProxy = WebRequest.GetSystemWebProxy();
 
-
         public static IAASResponse Reauest(
-
             string url,
-
             RequestMethod method,
-
             string user,
-
             string password,
-
             string sendData)
-        {
-
-            return Request(url, method, user, password, sendData, 20000);
-
-        }
+            => Request(url, method, user, password, sendData, 20000);
 
         public static IAASResponse Request(
-
-           string url,  RequestMethod method, string user,  string password,
-
+           string url, RequestMethod method, string user, string password,
            string sendData, int timeOut = 5000)
         {
-
             IAASResponse result;
-
             HttpWebRequest request;
-
             HttpWebResponse response = null;
-
             result = new IAASResponse();
 
             try
             {
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; //加上这一句
-
                 request = (HttpWebRequest)WebRequest.Create(url);
-
                 request.Method = method.ToString();
-
                 request.ContentType = "application/json";
-
                 request.UserAgent = DefaultUserAgent;
-
                 request.Proxy = SystemProxy;
-
-              
 
                 request.Credentials = new NetworkCredential(user, password);
 
                 if (timeOut > 0)
-
                     request.Timeout = timeOut;
-         
+
                 AddHttpRequestParams(request, sendData, method);
- 
+
                 response = (HttpWebResponse)request.GetResponse();
- 
+
                 using (StreamReader reader = new StreamReader(
-
-                     response.GetResponseStream(), System.Text.Encoding.UTF8))
+                     response.GetResponseStream(), Encoding.UTF8))
                 {
-
                     result.Content = reader.ReadToEnd();
-                    result.Content = Security.DecryptCommon(result.Content.Substring(1,result.Content.Length-2));
+                    result.Content = Security.DecryptCommon(result.Content.Substring(1, result.Content.Length - 2));
                     reader.Close();
-
                 }
 
                 switch (method)
                 {
-
                     case RequestMethod.GET:
-
                         result.Stauts = (response.StatusCode == HttpStatusCode.OK)
-
                             ? IAASResponseStatus.OK : IAASResponseStatus.Failed;
-
                         break;
 
                     case RequestMethod.POST:
-
-                        result.Stauts = (response.StatusCode == HttpStatusCode.OK ||
-
-                            response.StatusCode == HttpStatusCode.Created)
-
+                        result.Stauts = (response.StatusCode == HttpStatusCode.OK
+                            || response.StatusCode == HttpStatusCode.Created)
                             ? IAASResponseStatus.OK : IAASResponseStatus.Failed;
-
                         break;
 
                     case RequestMethod.DELETE:
-
                         result.Stauts = (response.StatusCode == HttpStatusCode.OK)
-
                             ? IAASResponseStatus.OK : IAASResponseStatus.Failed;
-
                         break;
+
                     case RequestMethod.PUT:
-
-                        result.Stauts = (response.StatusCode == HttpStatusCode.OK ||
-
-                            response.StatusCode == HttpStatusCode.Created)
-
+                        result.Stauts = (response.StatusCode == HttpStatusCode.OK
+                            || response.StatusCode == HttpStatusCode.Created)
                             ? IAASResponseStatus.OK : IAASResponseStatus.Failed;
-
                         break;
                 }
             }
-
             catch (System.Net.WebException e)
             {
- 
                 response = e.Response as HttpWebResponse;
- 
 
                 if (response != null)
                 {
-
                     result.StatusCode = response.StatusCode;
-
                     try
                     {
-
                         using (StreamReader reader = new StreamReader(
-
-                             response.GetResponseStream(), System.Text.Encoding.UTF8))
+                             response.GetResponseStream(), Encoding.UTF8))
                         {
                             result.Content = reader.ReadToEnd();
-                            
                             reader.Close();
                         }
                     }
@@ -440,97 +329,51 @@ namespace Core.Comm
                 }
 
                 result.Stauts = IAASResponseStatus.Exception;
- 
+
                 if (string.IsNullOrEmpty(result.Content))
-
                     result.Content = string.Format(
-
                        "{0}\r\n{1}", e.Message, e.StackTrace);
             }
             catch (Exception e)
             {
                 result.Stauts = IAASResponseStatus.Exception;
                 result.Content = string.Format(
-
                    "{0}\r\n{1}", e.Message, e.StackTrace);
             }
-
             finally
             {
-
                 if (response != null)
-                {
-
                     result.StatusCode = response.StatusCode;
-
-                }
-
                 result.InputTxt = sendData;
-
                 result.RequestUrl = url;
-
             }
 
             return result;
-
         }
-
 
         /// <summary> 
         /// 为HttpRequest添加参数
         /// </summary> 
         /// <param name="request"></param> 
         /// <param name="sendData"></param> 
-        public static void AddHttpRequestParams(HttpWebRequest request, String sendData, RequestMethod method)
+        public static void AddHttpRequestParams(HttpWebRequest request, string sendData, RequestMethod method)
         {
-
             byte[] data = null;
 
-
-
             if (method == RequestMethod.POST
-
-                 || method == RequestMethod.PUT)
-            {
-
-                if (string.IsNullOrEmpty(sendData))
-
-                    data = new byte[0];
-
-                else
-
-                    data = Encoding.UTF8.GetBytes(sendData);
-
-            }
-
-            else
-            {
-
-                if (string.IsNullOrEmpty(sendData))
-
-                    return;
-
-            }
-
-
+                || method == RequestMethod.PUT)
+                data = string.IsNullOrEmpty(sendData)
+                    ? (new byte[0])
+                    : Encoding.UTF8.GetBytes(sendData);
+            else if (string.IsNullOrEmpty(sendData))
+                return;
 
             //byte[] data = Encoding.UTF8.GetBytes(sendData);
 
             request.ContentLength = data.Length;
 
-            Stream requestStream = null;
-
-            using (requestStream = request.GetRequestStream())
-            {
-
+            using (Stream requestStream = request.GetRequestStream())
                 requestStream.Write(data, 0, data.Length);
-
-            }
-
-            requestStream.Close();
-
         }
-
     }
- 
 }
