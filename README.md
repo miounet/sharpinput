@@ -8,6 +8,8 @@
 
 此项目的目标是能运行在Win，Linux，苹果，安卓，IOS等平台下的一个中文并击录入平台
 
+搜狗双拼 配合 并击助手 300速度录屏：[BV1VB4y1X7mz](https://www.bilibili.com/video/BV1VB4y1X7mz/)
+
 
 
 ### 主要实现功能 （Win）
@@ -50,8 +52,6 @@
 它的特点： 1、 音码单字无重码 2、超300万大词库，高频词低重码 3、一击字支持3000+ 4、一击高频词6500+ 5、分左右一简，一简字80+ 6、右手单击顶功 7、取码规律强，不用死记硬背
 
 空明码 300速度演示地址：[BV1M3411Y7aB](https://www.bilibili.com/video/BV1M3411Y7aB/)
-
-搜狗双拼 配合 并击助手 300速度录屏：[BV1VB4y1X7mz](https://www.bilibili.com/video/BV1VB4y1X7mz/)
 
 
 
