@@ -8,28 +8,38 @@
 
 此项目的目标是能运行在Win，Linux，苹果，安卓，IOS等平台下的一个中文并击录入平台
 
+
+
 ### 主要实现功能 （Win）
 
-1.支持自定义码表
+- 支持自定义码表
 
-2.支持自定义并击映射
+- 支持自定义并击映射
 
-3.支持中英文并击录入，不需要使用shift配合，[演示视频](https://www.bilibili.com/video/BV1uT411F7Q2/)
+- 支持中英文并击录入，不需要使用shift配合，[演示视频](https://www.bilibili.com/video/BV1uT411F7Q2/)
 
-4.支持自定义
 
-5.一码、三码、四码自动上屏
+- 支持自定义
 
-6.支持大于4位 小于50位 码长
 
-7.速录助手模式，配合第3方输入法实现键盘并击录入
+- 一码、三码、四码自动上屏
 
-8.支持整句输出文字和输出图片 [演示视频](https://www.bilibili.com/video/BV1Ck4y147na/ https://www.bilibili.com/video/BV1gv4y1g7fG/)
+
+- 支持大于4位 小于50位 码长
+
+
+- 速录助手模式，配合第3方输入法实现键盘并击录入
+
+
+- 支持整句输出文字和输出图片 [演示视频](https://www.bilibili.com/video/BV1Ck4y147na/ https://www.bilibili.com/video/BV1gv4y1g7fG/)
+
+
+
 
 ### 开发配置
 
-1. 通过 Visual Studio Installer 安装 Visual Studio Community （社区版），需要勾选 `.NET桌面开发` 功能的负载；当前VS 2022测试可用；
-2. 将本目录下的`bin.zip`中的`Debug`文件夹解压到项目的`Core\bin\Debug` 中，此时能以Debug模式运行；若要使用Release模式运行，则也需将`bin.zip`中的`Debug`文件夹再解压一次，到 `Core\bin\Release` 路径，否则会提示找不到文件等错误；
+1. 通过 Visual Studio Installer 安装 Visual Studio Community （社区版），需勾选 `.NET桌面开发` 功能的负载；当前VS 2022可用；
+2. 将本目录下的`bin.zip`中的`Debug`文件夹解压到项目的`Core\bin\Debug` 中，此时能在VS中以Debug配置调试运行；若要使用Release配置，则也需将`bin.zip`中的`Debug`文件夹再解压一次，到 `Core\bin\Release` 路径；否则会提示找不到文件等错误；
 
 
 
