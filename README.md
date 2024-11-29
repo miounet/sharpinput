@@ -26,7 +26,9 @@
 
 它的特点： 1、 音码单字无重码 2、超300万大词库，高频词低重码 3、一击字支持3000+ 4、一击高频词6500+ 5、分左右一简，一简字80+ 6、右手单击顶功 7、取码规律强，不用死记硬背
 
-300速度演示地址：https://www.bilibili.com/video/BV1M3411Y7aB/
+空明码 300速度演示地址：https://www.bilibili.com/video/BV1M3411Y7aB/
+
+搜狗双拼 配合 并击助手 300速度录屏：https://www.bilibili.com/video/BV1VB4y1X7mz/
 
 更新日志:
 
