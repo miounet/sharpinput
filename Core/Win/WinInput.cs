@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Drawing;
 using Core.Comm;
 using Core.Config;
-using qzxxiEntity;
 using System.Drawing.Drawing2D;
 
 namespace Core.Win

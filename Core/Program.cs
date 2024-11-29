@@ -8,7 +8,6 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using Core.Comm;
-using qzxxiEntity;
 using System.Net;
 using System.Threading.Tasks;
 

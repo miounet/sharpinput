@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using qzxxiEntity;
 using System.Runtime.Serialization.Json;
 
 namespace Core.Comm
