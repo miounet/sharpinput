@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A8AD709-78BF-4FC3-80EC-FF3156834DC0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>SharpInput</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>log48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Base\ImageInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\InputMode.cs" />
+    <Compile Include="Base\InputStatusFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\IOut.cs" />
+    <Compile Include="Base\JFLib.cs" />
+    <Compile Include="Comm\ApiClient.cs" />
+    <Compile Include="Comm\Cache.cs" />
+    <Compile Include="Comm\Enum.cs" />
+    <Compile Include="Comm\Function.cs" />
+    <Compile Include="Comm\PlanThread.cs" />
+    <Compile Include="Comm\RegHelp.cs" />
+    <Compile Include="Comm\Security.cs" />
+    <Compile Include="Comm\YAMLHelp.cs" />
+    <Compile Include="Comm\ZipClass.cs" />
+    <Compile Include="Config\SetInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Win\ConfigFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\ConfigFrm.Designer.cs">
+      <DependentUpon>ConfigFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\DictMrg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\DictMrg.Designer.cs">
+      <DependentUpon>DictMrg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\ImgCom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\ImgCom.Designer.cs">
+      <DependentUpon>ImgCom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\DictEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\DictEdit.Designer.cs">
+      <DependentUpon>DictEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\DictTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\DictTool.Designer.cs">
+      <DependentUpon>DictTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\BJNumFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\BJNumFrm.Designer.cs">
+      <DependentUpon>BJNumFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\InfoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\InfoFrm.Designer.cs">
+      <DependentUpon>InfoFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\LXFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\LXFrm.designer.cs">
+      <DependentUpon>LXFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\SZCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\SZCount.Designer.cs">
+      <DependentUpon>SZCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\MapCount.cs" />
+    <Compile Include="Win\MapCount.Designer.cs">
+      <DependentUpon>MapCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\ProDictFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\ProDictFrm.Designer.cs">
+      <DependentUpon>ProDictFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\QueryFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\QueryFrm.Designer.cs">
+      <DependentUpon>QueryFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\UserDict.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\UserDict.Designer.cs">
+      <DependentUpon>UserDict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\WinInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\monodll\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="qzxxiEntity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\qzxxiEntity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dict\" />
+    <Folder Include="prodict\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Base\ImageInput.resx">
+      <DependentUpon>ImageInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\InputStatusFrm.resx">
+      <DependentUpon>InputStatusFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\ConfigFrm.resx">
+      <DependentUpon>ConfigFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\DictMrg.resx">
+      <DependentUpon>DictMrg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\ImgCom.resx">
+      <DependentUpon>ImgCom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\DictEdit.resx">
+      <DependentUpon>DictEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\DictTool.resx">
+      <DependentUpon>DictTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\BJNumFrm.resx">
+      <DependentUpon>BJNumFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\InfoFrm.resx">
+      <DependentUpon>InfoFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\LXFrm.resx">
+      <DependentUpon>LXFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\SZCount.resx">
+      <DependentUpon>SZCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\MapCount.resx">
+      <DependentUpon>MapCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\ProDictFrm.resx">
+      <DependentUpon>ProDictFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\QueryFrm.resx">
+      <DependentUpon>QueryFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\UserDict.resx">
+      <DependentUpon>UserDict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\WinInput.resx">
+      <DependentUpon>WinInput.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="bin\Debug\dict\bjcn.shp" />
+    <None Include="bin\Debug\dict\bjen.shp" />
+    <None Include="bin\Debug\dict\CloundDitPath.shp" />
+    <None Include="bin\Debug\dict\EnDit.shp" />
+    <None Include="bin\Debug\dict\LinkDit.shp" />
+    <None Include="bin\Debug\dict\map.shp" />
+    <None Include="bin\Debug\dict\one.shp" />
+    <None Include="bin\Debug\dict\pinyi.shp" />
+    <None Include="bin\Debug\dict\qjcn.shp" />
+    <None Include="bin\Debug\dict\qjen.shp" />
+    <None Include="bin\Debug\dict\UserDit.shp" />
+    <None Include="bin\Debug\dict\空明码\dicturl.shp" />
+    <None Include="bin\Debug\dict\空明码\ditinfo.shp" />
+    <None Include="bin\Debug\dict\空明码\ditver.shp" />
+    <None Include="bin\Debug\dict\空明码\help.doc" />
+    <None Include="bin\Debug\dict\空明码\MasterDit.shp" />
+    <None Include="bin\Debug\dict\空明码\one.shp" />
+    <None Include="bin\Debug\dict\空明码\Setting.shp" />
+    <None Include="bin\Debug\prodict\jsjch.shp" />
+    <None Include="bin\Debug\prodict\load.config" />
+    <None Include="bin\Debug\prodict\yxch.shp" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\dict\pinyin.txt" />
+    <Content Include="bin\Debug\dict\s2t.txt" />
+    <Content Include="bin\Debug\dict\空明码\cf.txt" />
+    <Content Include="bin\Debug\dict\空明码\mapdatacount.txt" />
+    <Content Include="bin\Debug\skin\back.png" />
+    <Content Include="bin\Debug\skin\hback.png" />
+    <Content Include="bin\Debug\skin\nslbb.png" />
+    <Content Include="bin\Debug\skin\slbb.png" />
+    <Content Include="bin\Debug\skin\srzs.png" />
+    <Content Include="bin\Debug\skin\ybf.png" />
+    <Content Include="bin\Debug\skin\ybj.png" />
+    <Content Include="bin\Debug\skin\zbf.png" />
+    <Content Include="bin\Debug\skin\zbj.png" />
+    <Content Include="bin\Debug\skin\zqf.png" />
+    <Content Include="bin\Debug\skin\zqj.png" />
+    <Content Include="bin\Debug\skin\搜狗\back.png" />
+    <Content Include="bin\Debug\skin\搜狗\hback.png" />
+    <Content Include="bin\Debug\skin\搜狗\log32.ico" />
+    <Content Include="bin\Debug\skin\搜狗\srzs.png" />
+    <Content Include="bin\Debug\skin\搜狗\ybf.png" />
+    <Content Include="bin\Debug\skin\搜狗\ybj.png" />
+    <Content Include="bin\Debug\skin\搜狗\zbf.png" />
+    <Content Include="bin\Debug\skin\搜狗\zbj.png" />
+    <Content Include="bin\Debug\skin\搜狗\zqf.png" />
+    <Content Include="bin\Debug\skin\搜狗\zqj.png" />
+    <Content Include="bin\Debug\skin\绿色\back.png" />
+    <Content Include="bin\Debug\skin\绿色\hback.png" />
+    <Content Include="bin\Debug\skin\绿色\log32.ico" />
+    <Content Include="bin\Debug\skin\绿色\srzs.png" />
+    <Content Include="bin\Debug\skin\绿色\ybf.png" />
+    <Content Include="bin\Debug\skin\绿色\ybj.png" />
+    <Content Include="bin\Debug\skin\绿色\zbf.png" />
+    <Content Include="bin\Debug\skin\绿色\zbj.png" />
+    <Content Include="bin\Debug\skin\绿色\zqf.png" />
+    <Content Include="bin\Debug\skin\绿色\zqj.png" />
+    <Content Include="bin\Debug\skin\默认\back.png" />
+    <Content Include="bin\Debug\skin\默认\hback.png" />
+    <Content Include="bin\Debug\skin\默认\log32.ico" />
+    <Content Include="bin\Debug\skin\默认\srzs.png" />
+    <Content Include="bin\Debug\skin\默认\ybf.png" />
+    <Content Include="bin\Debug\skin\默认\ybj.png" />
+    <Content Include="bin\Debug\skin\默认\zbf.png" />
+    <Content Include="bin\Debug\skin\默认\zbj.png" />
+    <Content Include="bin\Debug\skin\默认\zqf.png" />
+    <Content Include="bin\Debug\skin\默认\zqj.png" />
+    <Content Include="bin\Debug\zf\小仙键位.txt" />
+    <Content Include="bin\Debug\zf\直列键盘指法.txt" />
+    <Content Include="bin\Debug\zf\空明码键位.txt" />
+    <Content Include="bin\Debug\zf\空明通码键位.txt" />
+    <Content Include="bin\Debug\zf\空明飞耀键位.txt" />
+    <Content Include="bin\Debug\zf\速录.txt" />
+    <Content Include="bin\Debug\zf\飞耀键位.txt" />
+    <Content Include="log48.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
